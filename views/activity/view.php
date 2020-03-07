@@ -15,9 +15,7 @@ use yii\widgets\DetailView;
 
         <div class="form-group pull-right">
             <?= Html::a('К списку', ['activity/index'], ['class' => 'btn btn-info']) ?>
-            <?php if (Yii::$app->user->can('admin')) {
-                echo Html::a('Изменить', ['activity/update', 'id' => $model->id], ['class' => 'btn btn-success']);
-            } ?>
+            <?= Html::a('Изменить', ['activity/update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 

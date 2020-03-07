@@ -39,8 +39,9 @@ $columns = [
 //    'updated_at:datetime',
     [
         'label' => 'Ссылка на документ',
-        'value' => function (File $model) {
-            return Html::a('Ознакомиться', Yii::$app->homeUrl . 'uploads/' . $model->path, ['target' => '_blank']);
+        'value' => function(File $model)
+        {
+            return Html::a('Ознакомиться',Yii::$app->homeUrl. 'uploads/'. $model->path,['target' => '_blank']);
         },
         'format' => 'raw',
         'contentOptions' => ['style' => 'text-align:center; '],
@@ -73,9 +74,7 @@ if (Yii::$app->user->can('admin')) {
     <div class="site-about">
         <h1>Список файлов</h1>
         <p>
-            <?php if (Yii::$app->user->can('admin')) {
-                echo Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']);
-            } ?>
+            <?= Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']) ?>
         </p>
     </div>
 

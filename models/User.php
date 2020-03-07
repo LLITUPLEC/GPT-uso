@@ -75,8 +75,10 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'unique', 'targetClass' => User::className(), 'targetAttribute' => 'username'],
             [['username', 'first_name', 'last_name', 'third_name', 'telny_number',
                 'position_id', 'date_birth', 'date_receipt',], 'required'],
+
             [['username', 'first_name', 'last_name', 'third_name', 'position_id'], 'string'],
             [['telny_number'], 'unique', 'targetClass' => User::className(), 'targetAttribute' => 'telny_number'],
+
             [['username'], 'string', 'min' => 3],
             ['date_receipt', 'validateDate'],
         ];
