@@ -129,7 +129,9 @@ class UserController extends Controller
         $item = $id ? User::findOne($id) : new User([
             'id' => Yii::$app->user->id,
         ]);
-
+        if ( $item->id == 4) {
+            return 'Редактирование данной записи невозможно';
+        } else
         // обновлять записи может только admin
         if (Yii::$app->user->can('admin')) {
             if ($item->load(Yii::$app->request->post()) && $item->validate()) {
@@ -160,6 +162,8 @@ class UserController extends Controller
        $item = $this->findModel($id);
        if ($item->id == Yii::$app->user->id) {
            return 'Удаление собственной записи невозможно';
+       } else if ($item->id == 4) {
+           return 'Удаление общей записи также невозможно';
        } else {
            $this->findModel($id)->delete();
        }
