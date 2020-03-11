@@ -229,7 +229,7 @@ class Result extends ActiveRecord
     }
 
     /* Получаем массив с тестами для сдачи (ID, name)
-        и ID первого тестта для отображения */
+        и ID первого теста для отображения */
     public static function userNeedTests()
     {
         $arr = [];

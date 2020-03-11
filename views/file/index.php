@@ -44,18 +44,15 @@ $columns = [
         },
         'format' => 'raw',
         'contentOptions' => ['style' => 'text-align:center; '],
-    ],
-//    [
-//
-//        //рабочий вариант отображения уменьшенной копии изображения
-//        'label' => 'preview',
+
+        //рабочий вариант отображения уменьшенной копии изображения
 //        'attribute' => 'path',
 //        'format' => 'raw',
 //        'value' => function (File $model) {
 //            if ($model->path!='')
 //                return '<img src="'.Yii::$app->homeUrl. 'uploads/'.$model->path.'" width="50px" height="auto">'; else return 'no image';
 //        },
-//    ],
+    ],
 ];
 
 if (Yii::$app->user->can('admin')) {
@@ -77,7 +74,7 @@ if (Yii::$app->user->can('admin')) {
         <h1>Список файлов</h1>
         <p>
             <?php if (Yii::$app->user->can('admin')) {
-                echo Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']);
+                echo Html::a('Загрузить новый файл', ['/file/upload'], ['class' => 'btn btn-success']);
             } ?>
         </p>
     </div>

@@ -1,9 +1,11 @@
 <?php
 
 /* @var $this View */
+
 /* @var $content string */
 
 use app\models\Result;
+use app\models\User;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -16,6 +18,11 @@ AppAsset::register($this);
 if (!\Yii::$app->getUser()->isGuest) {
     Result::userNeedTests();
 }
+
+if (Yii::$app->user->can('user')) {
+    User::getCountInfo();
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -48,69 +55,71 @@ if (Yii::$app->controller->id == 'site') {
 }
 ?>
 
-    <?php
-    NavBar::begin([
-        'brandLabel' => Html::img(Yii::$app->homeUrl. 'uploads//54321.png' , ['style' => 'width:150px; margin-top:-14px; height:inherit']),
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+<?php
+NavBar::begin([
+    'brandLabel' => Html::img(Yii::$app->homeUrl . 'uploads//54321.png', ['style' => 'width:150px; margin-top:-14px; height:inherit']),
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => [
+        'class' => 'navbar-inverse navbar-fixed-top',
+    ],
+]);
+echo Nav::widget([
+    'options' => ['class' => 'navbar-nav navbar-right'],
+    'items' => [
+        ['label' => 'Главная', 'url' => ['/site/index']],
+
+        ['label' => 'Пройти тест', 'url' => ['/test/index'],
+            'visible' => Yii::$app->user->can('user') &&
+                Result::$testForUser[0] !== null],
+        ['label' => 'Работники', 'url' => ['/user/index'], 'visible'=>Yii::$app->user->can('admin')],
+        ['label' => 'События', 'url' => ['/activity/index']],
+        [
+           'label' => 'Работа с тестами',
+           'items' => [
+                ['label' => 'Список тестов', 'url' => ['/testing/test']],
+                ['label' => 'Список вопросов', 'url' => ['/testing/question']],
+                ['label' => 'Список ответов', 'url' => ['/testing/answer']],
+            ], 'visible'=>Yii::$app->user->can('admin')
         ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
+        [
+            'label' => '<span>Личный кабинет&nbsp;<span id="badge_target" class="badge badge-info">'
+                . User::$countInfo . '</span></span>',
+            'encode' => false,
+            'url' => ['/user/user_homepage?id=' . Yii::$app->user->id],
+            'visible' => Yii::$app->user->can('user'),
+        ],
 
-            ['label' => 'Пройти тест', 'url' => ['/test/index'],
-                'visible'=>Yii::$app->user->can('user') &&
-                    Result::$testForUser[0] !== null],
-
-            ['label' => 'Работники', 'url' => ['/user/index'], 'visible'=>Yii::$app->user->can('admin')],
-            ['label' => 'События', 'url' => ['/activity/index']],
-            [
-                'label' => 'Работа с тестами',
-                'items' => [
-                    ['label' => 'Список тестов', 'url' => ['/testing/test']],
-                    ['label' => 'Список вопросов', 'url' => ['/testing/question']],
-                    ['label' => 'Список ответов', 'url' => ['/testing/answer']],
-                ], 'visible'=>Yii::$app->user->can('admin')
-            ],
-            [
-                'label' => 'Личный кабинет',
-                'url' => ['/user/user_homepage?id=' . Yii::$app->user->id],
-                'visible'=>Yii::$app->user->can('user'),
-            ],
-
-            Yii::$app->user->isGuest ? (
-            ['label' => 'Войти', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Выйти (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+        Yii::$app->user->isGuest ? (
+        ['label' => 'Войти', 'url' => ['/site/login']]
+        ) : (
+            '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Выйти (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
             )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+            . Html::endForm()
+            . '</li>'
+        )
+    ],
+]);
+NavBar::end();
+?>
 
-    <div class="container" style="margin-top: 50px">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+<div class="container" style="margin-top: 50px">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
+</div>
 </div>
 
-<footer class="footer";">
-    <div class="container">
-        <p class="pull-left">&copy; АФ ООО <b>"Газпромтранс"</b> <?= date('Y') ?></p>
-    </div>
+<footer class="footer" ;
+">
+<div class="container">
+    <p class="pull-left">&copy; АФ ООО <b>"Газпромтранс"</b> <?= date('Y') ?></p>
+</div>
 </footer>
 
 <?php $this->endBody() ?>

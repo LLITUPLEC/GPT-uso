@@ -136,6 +136,8 @@ class ActivityController extends Controller
         if (Yii::$app->user->can('admin') || $item->user_id == Yii::$app->user->id) {
             if ($item->load(Yii::$app->request->post()) && $item->validate()) {
                 if ($item->save()) {
+                    (new User)->findAllUsersID();
+                    (new Activity)->infoActionInsert($item->id);
                     return $this->redirect(['activity/view', 'id' => $item->id]);
                 }
             }
@@ -164,8 +166,8 @@ class ActivityController extends Controller
 
         // удалять записи может только admin
         if ($item->user_id == Yii::$app->user->id || Yii::$app->user->can('admin')) {
+            (new Activity)->infoActionDelete($id);
             $item->delete();
-
             return $this->redirect(['activity/index']);
         }
 

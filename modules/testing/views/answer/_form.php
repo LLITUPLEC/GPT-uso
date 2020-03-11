@@ -19,6 +19,7 @@ $id_question = Yii::$app->request->get('ID_question');
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
+
     <?= $form->field($model, 'type')->radioList(['right' => 'правильный' , 'wrong' => 'неправильный'], ['value' => 'wrong']) ?>
 
     <div class="form-group">

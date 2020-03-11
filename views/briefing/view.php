@@ -10,6 +10,7 @@ use app\models\Position;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+Briefing::markBriefRead($model->id)
 ?>
     <div class="site-about">
         <h1>Просмотр события</h1>

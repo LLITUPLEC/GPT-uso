@@ -29,6 +29,9 @@ use yii\base\Exception;
  * @property int $date_birth
  * @property int $date_receipt
  * @property string $status
+ * @property int $i_act
+ * @property int $i_doc
+ * @property int $i_instr
  *
  * @property-read Position $position
  *
@@ -36,12 +39,14 @@ use yii\base\Exception;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public static $countInfo;
+    public static $totalUserID;
 
     public function behaviors()
     {
         return [TimestampBehavior::class,];
     }
-    
+
     public function attributeLabels()
     {
         return [
@@ -61,6 +66,9 @@ class User extends ActiveRecord implements IdentityInterface
             'date_receipt' => 'Дата устройства',
             'status' => 'активность',
             'email' => 'Электронная почта',
+            'i_act' => 'Новых событий',
+            'i_doc' => 'Новых документов',
+            'i_instr' => 'Новых инструктажей',
         ];
     }
 
@@ -148,4 +156,81 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->last_name . ' ' . $this->first_name;
     }
+
+    public static function getCountInfo()
+    {
+        $ID_user = Yii::$app->user->id;
+        $sql = Yii::$app->db->createCommand("SELECT SUM(`i_act` + `i_doc` + `i_instr`) FROM `users` WHERE `id` = {$ID_user}")->queryAll();
+        $count = $sql[0]['SUM(`i_act` + `i_doc` + `i_instr`)'];
+        if ($count == (null || 0)) {
+            self::$countInfo = null;
+        } else {
+            self::$countInfo = $count;
+        }
+    }
+
+    public function findAllUsersID()
+    {
+        $allID = [];
+        $sql = Yii::$app->db->createCommand("SELECT `id` FROM `users` WHERE 1")->queryAll();
+        foreach ($sql as $item => $id) {
+            $allID[] = $id['id'];
+        }
+        self::$totalUserID = $allID;
+    }
+
+    public function newUserSetInfo($user_ID)
+    {
+        /** info_action */
+        $sql1 = "SELECT `id`, `title` FROM `activities`";
+        $query1 = Yii::$app->db->createCommand($sql1)->queryAll();
+        $action_result = [];
+        foreach ($query1 as $item) {
+            $action_result[] = $item;
+        }
+        foreach ($action_result as $item => $value) {
+            $sql1_2 = "INSERT INTO `info_action` (`id_user`, `id_action`, `status`) 
+                        VALUES ({$user_ID}, {$value['id']}, 0)";
+            \Yii::$app->db->createCommand($sql1_2)->execute();
+            $sql1_3 = "UPDATE `users` SET `i_act` = `i_act` +1 WHERE users.id = $user_ID";
+            \Yii::$app->db->createCommand($sql1_3)->execute();
+        }
+
+
+        /** info_doc */
+        $sql2 = "SELECT `id`, `title` FROM `files`";
+        $query2 = Yii::$app->db->createCommand($sql2)->queryAll();
+        $doc_result = [];
+        foreach ($query2 as $item) {
+            $doc_result[] = $item;
+        }
+        foreach ($doc_result as $item => $value) {
+            $sql2_2 = "INSERT INTO `info_doc` (`id_user`, `id_doc`, `status`) 
+                        VALUES ({$user_ID}, {$value['id']}, 0)";
+            \Yii::$app->db->createCommand($sql2_2)->execute();
+            $sql2_3 = "UPDATE `users` SET `i_doc` = `i_doc` +1 WHERE users.id = $user_ID";
+            \Yii::$app->db->createCommand($sql2_3)->execute();
+        }
+
+        /** info_brief */
+        $sql3 = "SELECT briefings.id, briefings.title 
+                    FROM `briefings` 
+                    LEFT JOIN `users` ON briefings.user_id = users.id 
+                    WHERE briefings.position_id = 
+                    (SELECT users.position_id FROM `users` WHERE users.id = {$user_ID})";
+        $query3 = Yii::$app->db->createCommand($sql3)->queryAll();
+        $brief_result = [];
+        foreach ($query3 as $item) {
+            $brief_result[] = $item;
+        }
+        foreach ($brief_result as $item => $value) {
+            $sql3_2 = "INSERT INTO `info_brief` (`id_user`, `id_brief`, `status`) 
+                        VALUES ({$user_ID}, {$value['id']}, 0)";
+            \Yii::$app->db->createCommand($sql3_2)->execute();
+            $sql3_3 = "UPDATE `users` SET `i_instr` = `i_instr` +1 WHERE users.id = $user_ID";
+            \Yii::$app->db->createCommand($sql3_3)->execute();
+        }
+
+    }
+
 }

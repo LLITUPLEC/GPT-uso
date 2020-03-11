@@ -159,4 +159,10 @@ a.desc:after {
     padding: 1em;
 }
 
+.i_new_count {
+    color: #0b72b8;
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
 
