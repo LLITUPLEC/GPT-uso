@@ -107,6 +107,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $user = $model->register();
             if ($user) {
+                (new User)->newUserSetInfo($user->id);
                 Yii::$app->session->setFlash('success', 'Новый работник зарегистрирован.');
                 return $this->redirect(['view', 'id' => $user->id]);
             }

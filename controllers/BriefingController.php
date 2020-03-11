@@ -40,14 +40,14 @@ class BriefingController extends Controller
     {
         $queryo = Briefing::find()->where(['section' => 'Охрана труда']);
         $userModel = Yii::$app->user->identity;
-        
+
         // добавим условие на выборку по пользователю, если это не admin
         if (!Yii::$app->user->can('admin')) {
             $queryo->andWhere(['user_id' => Yii::$app->user->id])
                 ->andWhere(['position_id' => $userModel->position_id])
                 ->orWhere(['user_id' => Yii::$app->user->id])
                 ->orWhere(['position_id' => 13])
-                ->orWhere(['user_id'=> 4,'position_id' =>$userModel->position_id]);
+                ->orWhere(['user_id'=> 49,'position_id' =>$userModel->position_id]);
         }
 
         $provider = new ActiveDataProvider([
@@ -74,7 +74,7 @@ class BriefingController extends Controller
                 ->andWhere(['position_id' => $userModel->position_id])
                 ->orWhere(['user_id' => Yii::$app->user->id])
                 ->orWhere(['position_id' => 13])
-                ->orWhere(['user_id'=> 4,'position_id' =>$userModel->position_id]);
+                ->orWhere(['user_id'=> 49,'position_id' =>$userModel->position_id]);
         }
 
         $provider = new ActiveDataProvider([
@@ -112,6 +112,8 @@ class BriefingController extends Controller
         if (Yii::$app->user->can('admin')) {
             if ($item->load(Yii::$app->request->post()) && $item->validate()) {
                 if ($item->save()) {
+                    (new User)->findAllUsersID();
+                    (new Briefing)->infoBriefInsert($item->id, $item->user_id, $item->position_id);
                     return $this->redirect(['briefing/view', 'id' => $item->id]);
                 }
             }
@@ -130,6 +132,7 @@ class BriefingController extends Controller
 
         // удалять записи может только admin
         if (Yii::$app->user->can('admin')) {
+            (new Briefing)->infoBriefDelete($id);
             $item->delete();
 
             return $this->redirect(['briefing/index']);

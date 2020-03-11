@@ -27,7 +27,8 @@ use yii\widgets\ActiveForm;
 
 
 $this->title = 'Список работников';
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>

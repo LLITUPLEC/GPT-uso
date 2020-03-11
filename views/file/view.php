@@ -9,6 +9,7 @@ use app\models\File;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+File::markDocRead($model->id);
 ?>
     <div class="row">
         <h1>Просмотр файла</h1>

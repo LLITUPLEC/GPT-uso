@@ -9,6 +9,8 @@ use app\models\Activity;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+Activity::markActionRead($model->id);
+
 ?>
     <div class="site-about">
         <h1>Просмотр события</h1>
