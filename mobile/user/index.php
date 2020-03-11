@@ -1,11 +1,10 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\UserSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-/**
- * @var $model Position
- * @var $provider ActiveDataProvider
- */
+/* @var $model Position */
 
 use app\assets\AppAsset;
 use app\assets\MobileAsset;
@@ -27,11 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Создать нового', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Зарегистрировать нового работника', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?=  GridView::widget([
-    'dataProvider' => $provider,
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
     'columns' => [
     [
     'attribute' => 'last_name',

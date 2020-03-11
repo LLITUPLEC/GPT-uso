@@ -1,11 +1,10 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\UserSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-/**
- * @var $model Position
- * @var $provider ActiveDataProvider
- */
+ /* @var $model Position */
 
 use app\models\Position;
 use app\models\User;
@@ -16,15 +15,6 @@ use yii\grid\SerialColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 
 $this->title = 'Список работников';
 //$this->params['breadcrumbs'][] = $this->title;
