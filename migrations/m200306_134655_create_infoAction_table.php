@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%infoAction}}`.
+ * Handles the creation of table `infoAction`.
  */
 class m200306_134655_create_infoAction_table extends Migration
 {

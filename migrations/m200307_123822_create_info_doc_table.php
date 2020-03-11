@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%info_doc}}`.
+ * Handles the creation of table `info_doc`.
  */
-class m200307_123822_create_infoDoc_table extends Migration
+class m200307_123822_create_info_doc_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,14 +20,14 @@ class m200307_123822_create_infoDoc_table extends Migration
         ]);
 
         $this->addForeignKey(
-            'fk_user_id',
+            'fk_info_doc_user',
             'info_doc', 'id_user',
             'users', 'id',
             'cascade'
         );
 
         $this->addForeignKey(
-            'fk_doc_id',
+            'fk_info_doc_file',
             'info_doc', 'id_doc',
             'files', 'id',
             'cascade'
@@ -42,8 +42,8 @@ class m200307_123822_create_infoDoc_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk_user_id', 'info_doc');
-        $this->dropForeignKey('fk_doc_id', 'info_doc');
+        $this->dropForeignKey('fk_info_doc_user', 'info_doc');
+        $this->dropForeignKey('fk_info_doc_file', 'info_doc');
         $this->dropIndex('idx_user_id', 'info_doc');
         $this->dropIndex('idx_doc_id', 'info_doc');
         $this->dropTable('info_doc');
