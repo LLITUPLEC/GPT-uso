@@ -75,7 +75,7 @@ if (Yii::$app->user->can('admin')) {
         Html::tag('p', Html::encode('Для просмотра подробного описания нажмите иконку в виде глаза'))
         )
         ?>
-    </div><br>
+    </div>
 
 <?= GridView::widget([
     'dataProvider' => $provider, // $provider->getModels() [....]

@@ -24,25 +24,25 @@ $countUserActivity = null;
 $countUserDocs = null;
 $countUserBrief = null;
 
-if (count($userActivity) == null) {
-    $countUserActivity = 0;
-} else {
-    $countUserActivity = count($userActivity);
-}
+    if (count($userActivity) == null) {
+        $countUserActivity = 0;
+    } else {
+        $countUserActivity = count($userActivity);
+    }
 
-if (count($userDocs) == null) {
-    $countUserDocs = 0;
-} else {
-    $countUserDocs = count($userDocs);
-}
+    if (count($userDocs) == null) {
+        $countUserDocs = 0;
+    } else {
+        $countUserDocs = count($userDocs);
+    }
 
-if (count($userBrief) == null) {
-    $countUserBrief = 0;
-} else {
-    $countUserBrief = count($userBrief);
-}
+    if (count($userBrief) == null) {
+        $countUserBrief = 0;
+    } else {
+        $countUserBrief = count($userBrief);
+    }
 
-?>
+    ?>
 
 <h1>Страница пользователя  <u><?= Html::encode(Yii::$app->user->identity->username)?></u></h1>
 
