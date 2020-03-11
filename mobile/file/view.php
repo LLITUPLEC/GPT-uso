@@ -17,7 +17,9 @@ MobileAsset::register($this);
 
         <div class="form-group pull-right">
             <?= Html::a('К списку', ['file/index'], ['class' => 'btn btn-info']) ?>
-            <?= Html::a('Изменить', ['file/update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?php if (Yii::$app->user->can('admin')) {
+                echo Html::a('Изменить', ['file/update', 'id' => $model->id], ['class' => 'btn btn-success']);
+            } ?>
         </div>
     </div>
 

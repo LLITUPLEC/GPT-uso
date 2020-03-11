@@ -3,7 +3,9 @@
 /* @var $this View */
 /* @var $content string */
 
+use app\assets\MobileAsset;
 use app\models\Result;
+use app\models\User;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -11,10 +13,15 @@ use yii\bootstrap\NavBar;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+MobileAsset::register($this);
 
 AppAsset::register($this);
 if (!\Yii::$app->getUser()->isGuest) {
     Result::userNeedTests();
+}
+
+if (Yii::$app->user->can('user')) {
+    User::getCountInfo();
 }
 ?>
 <?php $this->beginPage() ?>
@@ -61,23 +68,13 @@ if (!\Yii::$app->getUser()->isGuest) {
                 ], 'visible'=>Yii::$app->user->can('admin')
             ],
             [
-                'label' => 'Личный кабинет',
+                'label' => '<span>Личный кабинет&nbsp;<span id="badge_target" class="badge badge-info">'
+                    . User::$countInfo . '</span></span>',
+                'encode' => false,
                 'url' => ['/user/user_homepage?id=' . Yii::$app->user->id],
-                'visible'=>Yii::$app->user->can('user')
+                'visible' => Yii::$app->user->can('user'),
             ],
 
-//            Yii::$app->user->isGuest ? (
-//                ['label' => 'Личный кабинет', 'url' => ['/site/login']]
-//            ) : (
-//                '<li>'
-//                . Html::beginForm(['/user/user_homepage?id=' . Yii::$app->user->id], 'post')
-//                . Html::submitButton(
-//                    'Страница (' . Yii::$app->user->identity->username . ')',
-//                    ['class' => 'btn btn-link logout']
-//                )
-//                . Html::endForm()
-//                . '</li>'
-//            ),
 
             Yii::$app->user->isGuest ? (
             ['label' => 'Войти', 'url' => ['/site/login']]
@@ -108,8 +105,6 @@ if (!\Yii::$app->getUser()->isGuest) {
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; АФ ООО <b>"Газпромтранс"</b> <?= date('Y') ?></p>
-
-        <!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
     </div>
 </footer>
 

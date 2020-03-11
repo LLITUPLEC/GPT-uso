@@ -59,7 +59,7 @@ if (Yii::$app->user->can('admin')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Опции',
-        'headerOptions'=>['style'=>'width: 35px;']
+        'headerOptions'=>['style'=>'width: 35px;'],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
@@ -75,7 +75,9 @@ if (Yii::$app->user->can('admin')) {
     <div class="site-about">
         <h1>Список файлов</h1>
         <p>
-            <?= Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']) ?>
+            <?php if (Yii::$app->user->can('admin')) {
+                echo Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']);
+            } ?>
         </p>
     </div>
 

@@ -43,6 +43,7 @@ if (Yii::$app->user->can('admin')) {
         'header' => 'Операции',
         'headerOptions'=>['style'=>'width: 45px;'],
         'options' => ['style' => 'background-color:rgba(128, 203, 255, 0.64);'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
@@ -51,6 +52,7 @@ if (Yii::$app->user->can('admin')) {
         'template' => '{view}',
         'headerOptions'=>['style'=>'width: 45px;'],
         'options' => ['style' => 'background-color:rgba(128, 203, 255, 0.64);'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 }
 

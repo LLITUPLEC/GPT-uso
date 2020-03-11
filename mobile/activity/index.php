@@ -35,6 +35,7 @@ if (Yii::$app->user->can('admin')) {
         'class' => ActionColumn::class,
         'header' => 'Операции',
         'options' => ['style' => 'background-color:rgba(254, 255, 249, 0.8);'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
@@ -42,6 +43,7 @@ if (Yii::$app->user->can('admin')) {
         'header' => 'Операции',
         'template' => '{view}',
         'options' => ['style' => 'background-color:rgba(254, 255, 249, 0.8);'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 }
 
