@@ -18,13 +18,17 @@ class BriefingController extends Controller
     {
         return [
             'access' => [
-                // доступ только для админов
                 'class' => AccessControl::class,
-                'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
+                        'actions' => ['create', 'update', 'delete'],
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view','index_ot','index_bd',],
+                        'roles' => ['user'],
                     ],
                 ],
             ],
@@ -47,7 +51,7 @@ class BriefingController extends Controller
                 ->andWhere(['position_id' => $userModel->position_id])
                 ->orWhere(['user_id' => Yii::$app->user->id])
                 ->orWhere(['position_id' => 13])
-                ->orWhere(['user_id'=> 49,'position_id' =>$userModel->position_id]);
+                ->orWhere(['user_id'=> 4,'position_id' =>$userModel->position_id]);
         }
 
         $provider = new ActiveDataProvider([
@@ -74,7 +78,7 @@ class BriefingController extends Controller
                 ->andWhere(['position_id' => $userModel->position_id])
                 ->orWhere(['user_id' => Yii::$app->user->id])
                 ->orWhere(['position_id' => 13])
-                ->orWhere(['user_id'=> 49,'position_id' =>$userModel->position_id]);
+                ->orWhere(['user_id'=> 4,'position_id' =>$userModel->position_id]);
         }
 
         $provider = new ActiveDataProvider([
