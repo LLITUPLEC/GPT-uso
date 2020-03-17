@@ -59,12 +59,14 @@ if (Yii::$app->user->can('admin')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Операции',
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Операции',
-        'template' => '{view}'
+        'template' => '{view}',
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 }
 

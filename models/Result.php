@@ -96,7 +96,7 @@ class Result extends ActiveRecord
             $recordTest = new Result();
             $recordTest->test_id = $testID;
             $recordTest->user_id = $userID;
-            $recordTest->attempts = 1;
+            $recordTest->attempts = 0;
             $recordTest->quantity = 0;
             $recordTest->status = 0;
 
@@ -160,7 +160,7 @@ class Result extends ActiveRecord
             WHERE auth_assignment.item_name = 'user'")->queryAll();
 
         foreach ($sql as $value => $item) {
-            self::$countUsers = $item['COUNT(*)'];
+            self::$countUsers = $item['COUNT(*)']+1;
         }
 
         /* Обновляем кол-во пользователей в `tests` на актуальное  */
@@ -193,11 +193,15 @@ class Result extends ActiveRecord
         if (self::$countUsersCompleteTest === self::$countUsers) {
             $sql = "UPDATE `tests` SET `closed`= 1 WHERE id = {$id}";
             Yii::$app->db->createCommand($sql)->execute();
-
             /* Удаляем из Results у всех пользователей неактуальный тест */
-            $sql2 = "DELETE FROM `results` WHERE `test_id` = {$id} AND `status` = 1";
+            $sql2 = "DELETE FROM `results` WHERE `test_id` = {$id}";
             Yii::$app->db->createCommand($sql2)->execute();
         }
+
+//        if (Test::find()->where(['closed' => 1])){
+//            $sql3 = "DELETE FROM `results` WHERE `test_id` = {$id} AND `status` = 1";
+//            Yii::$app->db->createCommand($sql3)->execute();
+//        }
     }
 
     /* Получаем массив с актуальными тестами (ID, name)  */

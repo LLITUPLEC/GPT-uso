@@ -117,7 +117,7 @@ $countUserBrief = null;
         <div class="card-header" id="headingThree">
             <h5 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <span class="i_new_count">Новых инструктажей/проверок: &nbsp;&nbsp;</span><span id="i_new_brief" class="badge badge-primary badge-pill"><?php echo $countUserBrief ?></span>
+                    <span class="i_new_count">Новых проверок знаний: &nbsp;&nbsp;</span><span id="i_new_brief" class="badge badge-primary badge-pill"><?php echo $countUserBrief ?></span>
                 </button>
             </h5>
         </div>

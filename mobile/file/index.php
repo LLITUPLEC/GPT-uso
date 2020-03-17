@@ -60,13 +60,15 @@ if (Yii::$app->user->can('admin')) {
         'class' => ActionColumn::class,
         'header' => 'Опции',
         'headerOptions'=>['style'=>'width: 35px;'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Опции',
         'template' => '{view}',
-        'headerOptions'=>['style'=>'width: 35px;']
+        'headerOptions'=>['style'=>'width: 35px;'],
+        'contentOptions' => ['style' => 'text-align:center; '],
     ];
 }
 

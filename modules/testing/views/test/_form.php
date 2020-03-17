@@ -19,7 +19,7 @@ Result::getCountUsers();
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'closed')->radioList([0 => 'open',1 => 'closed',]) ?>
+    <?= $form->field($model, 'closed')->radioList([0 => 'Активный',1 => 'НЕактивный',]) ?>
 
     <?= $form->field($model, 'passed')->hiddenInput(['value' => 0])->label('')?>
 
