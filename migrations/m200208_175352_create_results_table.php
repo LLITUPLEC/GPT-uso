@@ -34,6 +34,7 @@ class m200208_175352_create_results_table extends Migration
             'users', 'id',
             'cascade'
         );
+        // создание реляционной связи на тесты
         $this->addForeignKey(
             'fk_result_test',
             'results', 'test_id',

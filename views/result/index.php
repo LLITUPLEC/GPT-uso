@@ -18,7 +18,9 @@ $columns = [
         'attribute' => 'test_id', // авто-подключение зависимостей
         'value' => function (Result $model) {
             return $model->test->name;
-        }
+        },
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
         // $model->test->name
     ],
     //'user_id',
@@ -27,19 +29,29 @@ $columns = [
         'attribute' => 'user_id', // авто-подключение зависимостей
         'value' => function (Result $model) {
             return $model->user->getFullName();
-        }
+        },
+        'visible' => Yii::$app->user->can('admin'),
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
         // $model->user->last_name
     ],
-    'date_test:datetime',
+    [
+        'attribute' => 'date_test', 'format' => ['datetime'],
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
+    ],
+//    'date_test:datetime',
 //    'attempts',
     [
         'attribute' => 'attempts',
-        'contentOptions' => ['style' => 'text-align:center']
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
     ],
 //    'quantity',
     [
         'attribute' => 'quantity',
-        'contentOptions' => ['style' => 'text-align:center']
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
     ],
     [
         'attribute' => 'status',
@@ -51,7 +63,8 @@ $columns = [
             } else {
                 return ['style' => 'background-color:#f31d1dd4; font-weight:bold; text-align:center'];
             }
-        }
+        },
+        'headerOptions'=>['style' => 'text-align:center'],
     ],
 ];
 
@@ -60,14 +73,16 @@ if (Yii::$app->user->can('admin')) {
         'class' => ActionColumn::class,
         'header' => 'Операции',
         'template' => '{view}',
-        'contentOptions' => ['style' => 'text-align:center']
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
     ];
 } else if (Yii::$app->user->can('user')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Операции',
         'template' => '{view}',
-        'contentOptions' => ['style' => 'text-align:center']
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
     ];
 }
 

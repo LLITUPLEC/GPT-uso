@@ -53,6 +53,14 @@ $columns = [
 //                return '<img src="'.Yii::$app->homeUrl. 'uploads/'.$model->path.'" width="50px" height="auto">'; else return 'no image';
 //        },
     ],
+//    [
+//        'label' => 'Список ознакомившихся',
+//        'value' => function (File $model) {
+//            return Html::a('Посмотреть', ['/acquaint/index'] , ['target' => '_blank']);
+//        },
+//        'format' => 'raw',
+//        'contentOptions' => ['style' => 'text-align:center; '],
+//    ],
 ];
 
 if (Yii::$app->user->can('admin')) {
@@ -72,13 +80,18 @@ if (Yii::$app->user->can('admin')) {
 
 ?>
 
-    <div class="site-about">
+    <div class="site-about" style="margin-bottom: 60px;">
         <h1>Список файлов</h1>
-        <p>
+        <div class="form-group pull-left">
             <?php if (Yii::$app->user->can('admin')) {
                 echo Html::a('Загрузить новый файл', ['/file/upload'], ['class' => 'btn btn-success']);
             } ?>
-        </p>
+        </div>
+        <div class="form-group pull-right">
+            <?php if (Yii::$app->user->can('admin')) {
+                echo Html::a('Список ознакомившихся', ['/acquaint/index'], ['class' => 'btn btn-info']);
+            } ?>
+        </div>
     </div>
 
 <?= GridView::widget([

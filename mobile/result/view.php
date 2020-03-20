@@ -26,6 +26,7 @@ MobileAsset::register($this);
             // activity.id - пример перезаписи названия столбца
             'label' => 'Порядковый номер',
             'attribute' => 'id',
+            'visible' => Yii::$app->user->can('admin'),
         ],
         [
             'label' => 'Название теста',
@@ -49,7 +50,8 @@ MobileAsset::register($this);
             'attribute' => 'user_id', // авто-подключение зависимостей
             'value' => function (Result $model) {
                 return $model->user->last_name;
-            }
+            },
+            'visible' => Yii::$app->user->can('admin'),
             // $model->user->last_name
         ],
         [
@@ -57,7 +59,8 @@ MobileAsset::register($this);
             'attribute' => 'user_id', // авто-подключение зависимостей
             'value' => function (Result $model) {
                 return $model->user->first_name;
-            }
+            },
+            'visible' => Yii::$app->user->can('admin'),
             // $model->user->last_name
         ],
         'date_test:datetime',

@@ -13,16 +13,21 @@ use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 $columns = [
+//    [
+//        'label' => 'Идентификатор',
+//        'value' => function (Briefing $model) {
+//            return "№{$model->id}";
+//        },
+//        'headerOptions'=>['style'=>'width: 30px;'],
+//    ],
     [
-        'label' => 'Идентификатор',
-        'value' => function (Briefing $model) {
-            return "№{$model->id}";
-        },
-        'headerOptions'=>['style'=>'width: 30px;'],
+        'class' => SerialColumn::class,
+        'header' => 'Порядковый номер',
     ],
     //'id',
     'section',

@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'class' => SerialColumn::class,
         'header' => 'Порядковый номер',
     ],
-    'id',
+//    'id',
     'last_name',
     'first_name',
     'third_name',
@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attribute' => 'position_id',
         'value' => function (User $model) {
             return $model->position->title;
-        }
+        },
+        'headerOptions'=>['style' => 'text-align:center'],
     ],
     'date_birth:date',
     'date_receipt:date',
@@ -54,7 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
     [
         'class' => ActionColumn::class,
         'header' => 'Операции',
-        'contentOptions' => ['style' => 'text-align:center']
+        'contentOptions' => ['style' => 'text-align:center'],
+        'headerOptions'=>['style' => 'text-align:center'],
     ],
     ],
 ])?>

@@ -34,6 +34,8 @@ if (Yii::$app->user->can('user')) {
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl;?>
+    /web/uploads/ico.JPG" type="image/x-icon" />
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -49,6 +51,8 @@ if (Yii::$app->controller->id == 'site') {
 } else if ((Yii::$app->controller->id == 'result')){
     echo '<div class="wrap"  style="background: url(\'/web/uploads/123.jpg\') no-repeat; background-size: 100%">';
 } else if ((Yii::$app->controller->id == 'briefing')){
+    echo '<div class="wrap"  style="background: url(\'/web/uploads/123.jpg\') no-repeat; background-size: 100%">';
+} else if (Yii::$app->controller->id == 'acquaint'){
     echo '<div class="wrap"  style="background: url(\'/web/uploads/123.jpg\') no-repeat; background-size: 100%">';
 } else {
     echo '<div class="wrap">';
