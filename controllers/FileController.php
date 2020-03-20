@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Acquaint;
 use app\models\File;
 use app\models\User;
 use Yii;
@@ -65,10 +66,25 @@ class FileController extends Controller
     public function actionView(int $id)
     {
         $item = File::findOne($id);
+        $item1 = new Acquaint([
+            'file_id' => $id,
+            'user_id' => Yii::$app->user->id,
+        ]);
+
+        $data = Yii::$app->request->post();
+
+        $validItem = $item1->load($data) && $item1->validate();
+
+        if ($validItem) {
+            if ($item1->save()) {
+                return $this->redirect(['acquaint/view', 'id' => $item1->id]);
+            }
+        }
 
         // просматривать файлы может любой авторизоанный пользователь
         return $this->render('@app/views/file/view', [
             'model' => $item,
+            'item1' => $item1,
         ]);
     }
 
