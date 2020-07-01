@@ -53,6 +53,7 @@ if (Yii::$app->user->can('admin')) {
     $columns[] = [
         'class' => ActionColumn::class,
         'header' => 'Операции',
+        'template' => '{view}',
         'contentOptions' => ['style' => 'text-align:center'],
         'headerOptions'=>['style' => 'text-align:center'],
     ];
