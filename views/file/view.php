@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
+
 File::markDocRead($model->id);
 ?>
     <div class="row">
@@ -79,7 +80,7 @@ File::markDocRead($model->id);
 
 <?php $form = ActiveForm::begin(); ?>
 
-   <?php if (Acquaint::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['file_id' => $model->id])->exists()) {
+   <?php if (Yii::$app->user->can('admin') || Acquaint::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['file_id' => $model->id])->exists()) {
        echo false;
 } else {
    echo $form->field($item1, 'file_id')->hiddenInput([$model->id])->hint('Нажимая на кнопку <b>"Ознаколмен"</b>, Вы подтверждаете, что ознакомились с документом ');

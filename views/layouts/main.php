@@ -34,7 +34,10 @@ if (Yii::$app->user->can('user')) {
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl;?>
+
+<!--  На некоторых серверах явное указание baseUrl необязательно, поэтому закомментировал. При необходимости раскомментируйте
+      Иконка на вкладку -->
+    <link rel="shortcut icon" href="<?php// echo Yii::$app->request->baseUrl;?>
     /web/uploads/ico.JPG" type="image/x-icon" />
 </head>
 <body>

@@ -13,15 +13,6 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 $columns = [
-
-    [
-        'label' => 'С чем ознакомился',
-        'attribute' => 'file_id', // авто-подключение зависимостей
-        'value' => 'file.title',
-        'contentOptions' => ['style' => 'text-align:center'],
-        'headerOptions'=>['style' => 'text-align:center'],
-        // $model->test->name
-    ],
     [
         'label' => 'Номер документа',
         'attribute' => 'number', // авто-подключение зависимостей

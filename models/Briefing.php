@@ -91,7 +91,7 @@ class Briefing extends ActiveRecord
         $usersForBrief = [];
 
         /** Поиск конкретного человека по ID. Должность указана или == ВСЕ */
-        if ($user_id != 555) {
+        if ($user_id != 4) {
             $sqlUser = "SELECT users.id
                     FROM `users` 
                     LEFT JOIN `briefings` 
@@ -102,7 +102,7 @@ class Briefing extends ActiveRecord
                 $usersForBrief[] = $value['id'];
             }
             /** Поиск группы по указанной должности. ID работника == ВСЕ */
-        } elseif ($user_id == 555 && $position_id != 13) {
+        } elseif ($user_id == 4 && $position_id != 13) {
             $sqlPosition = "SELECT users.id
                         FROM `users` 
                         LEFT JOIN `briefings` 
@@ -113,7 +113,7 @@ class Briefing extends ActiveRecord
                 $usersForBrief[] = $value['id'];
             }
             /** ID работника == ВСЕ, Должности == ВСЕ */
-        } elseif ($user_id == 555 && $position_id == 13) {
+        } elseif ($user_id == 4 && $position_id == 13) {
             $usersForBrief = User::$totalUserID;
         }
 

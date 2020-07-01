@@ -97,7 +97,7 @@ class BriefingController extends Controller
     public function actionView(int $id)
     {
         $item = Briefing::findOne($id);
-        if (Yii::$app->user->can('admin') || $item->user_id == Yii::$app->user->id || $item->position_id == 13) {
+        if (Yii::$app->user->can('admin') || $item->user_id == Yii::$app->user->id || $item->user_id == 4 || $item->position_id == 13) {
             return $this->render('@app/views/briefing/view', [
                 'model' => $item,
             ]);
