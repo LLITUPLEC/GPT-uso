@@ -74,13 +74,18 @@ if (Yii::$app->user->can('admin')) {
 
 ?>
 
-    <div class="site-about">
+    <div class="site-about" style="margin-bottom: 110px;">
         <h1>Список файлов</h1>
-        <p>
+        <div class="form-group pull-left">
             <?php if (Yii::$app->user->can('admin')) {
-                echo Html::a('Загрузить новый', ['/file/upload'], ['class' => 'btn btn-success']);
+                echo Html::a('Загрузить новый файл', ['/file/upload'], ['class' => 'btn btn-success']);
             } ?>
-        </p>
+        </div>
+        <div class="form-group pull-left">
+            <?php if (Yii::$app->user->can('admin')) {
+                echo Html::a('Список ознакомившихся', ['/acquaint/index'], ['class' => 'btn btn-info']);
+            } ?>
+        </div>
     </div>
 
 <?= GridView::widget([
