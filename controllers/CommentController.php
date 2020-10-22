@@ -5,7 +5,6 @@ namespace app\controllers;
 
 
 use app\models\Comment;
-use app\models\CommentSearch;
 use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -33,10 +32,6 @@ class CommentController extends Controller
         if (Yii::$app->user->isGuest) {
             if ($item->load(Yii::$app->request->post()) && $item->validate()) {
                 if ($item->save()) {
-//                    return $this->render('/comment/index', [
-//                        'model' => $item,
-//                        'provider' => $provider,
-//                    ]);
                     return $this->redirect(['comment/index']);
 //                    return 'Запрос принят!';
                 }

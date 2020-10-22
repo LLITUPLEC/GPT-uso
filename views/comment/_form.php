@@ -41,7 +41,7 @@ use yii\widgets\Pjax;
 <?php $js = <<<JS
     $("document").ready(function(){
     $("#new_comment").on("pjax:end", function() {
-    $.pjax.reload({container:"#grid-pjax"},{timeout : 1});  //Reload GridView
+    $.pjax.reload({container:"#grid-pjax"},{timeout : false});  //Reload GridView
         });
     });
 JS;

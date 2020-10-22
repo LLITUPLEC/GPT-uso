@@ -9,37 +9,17 @@
 
 
 use app\models\Comment;
-use app\models\User;
-use yii\bootstrap\Modal;
 use yii\data\ActiveDataProvider;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 $columns = [
-    //[
-    //    'class' => SerialColumn::class,
-    //    'header' => 'Псевдо-порядковый номер',
-    //],
-    //[
-    //    // activity.id - пример перезаписи названия столбца
-    //    'label' => 'Порядковый номер',
-    //    'attribute' => 'id',
-    //],
-    [
-        // activity.id - пример перезаписи значения
-        'label' => 'Порядковый номер',
-        'value' => function (Comment $model) {
-            return "# {$model->id}";
-        },
-    ],
-    //'id',
+
     [
         'label' => 'Кто создал',
-        'attribute' => 'name', // авто-подключение зависимостей
+        'attribute' => 'name',
         'value' => function (Comment $model) {
             return $model->name;
         }
@@ -48,7 +28,6 @@ $columns = [
     'comment',
     'email',
     'created_at:datetime',
-    //'user_id',
 ];
 
 if (Yii::$app->user->isGuest) {
