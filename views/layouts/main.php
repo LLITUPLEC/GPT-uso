@@ -73,6 +73,7 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
+        ['label' => 'Чат', 'url' => ['/chat/index']],
         ['label' => 'Главная', 'url' => ['/site/index']],
 
         ['label' => 'Пройти тест', 'url' => ['/test/index'],
